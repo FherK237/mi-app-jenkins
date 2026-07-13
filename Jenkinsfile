@@ -7,7 +7,7 @@ pipeline {
         // Para Docker Hub usar: REGISTRY = 'docker.io'
         
         // Nombre de la imagen (formato: usuario/repo)
-        IMAGE_NAME = 'FherK237/mi-app-jenkins'
+        IMAGE_NAME = 'fherk237/mi-app-jenkins'
         
         // Variables de versión
         COMMIT_SHA = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
