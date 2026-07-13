@@ -74,29 +74,23 @@ pipeline {
         // STAGE 5: Publicación en Registro
         // ============================================
         stage('Push to Registry') {
-            // when {
-            //     // Solo publicar en main o si es un tag
-            //     branch 'main'
-            // }
             steps {
-                echo '📤 Publicando imagen en GitHub Container Registry...'
-                script {
-                    // Login a GHCR
-                    sh '''
-                        echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_USER} --password-stdin
-                    '''
-                    
-                    // Taggear la imagen
+                echo ' 📤  Publicando imagen en GitHub Container Registry...'
+                
+                // Aquí mandamos a llamar el token que guardaste en Jenkins
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh """
-                        docker tag ${IMAGE_TAG_COMMIT} ${IMAGE_TAG_LATEST}
-                        docker tag ${IMAGE_TAG_COMMIT} ${IMAGE_TAG_BUILD}
-                    """
+                    # 1. Iniciar sesión en GitHub (Cambiamos la variable por tu usuario real)
+                    echo \$GITHUB_TOKEN | docker login ghcr.io -u fherk237 --password-stdin
                     
-                    // Publicar todas las tags
-                    sh """
-                        docker push ${IMAGE_TAG_COMMIT}
-                        docker push ${IMAGE_TAG_LATEST}
-                        docker push ${IMAGE_TAG_BUILD}
+                    # 2. Etiquetar la imagen
+                    docker tag ${IMAGE_TAG_COMMIT} ${IMAGE_TAG_LATEST}
+                    docker tag ${IMAGE_TAG_COMMIT} ${IMAGE_TAG_BUILD}
+                    
+                    # 3. Subir las imágenes
+                    docker push ${IMAGE_TAG_COMMIT}
+                    docker push ${IMAGE_TAG_LATEST}
+                    docker push ${IMAGE_TAG_BUILD}
                     """
                 }
             }
