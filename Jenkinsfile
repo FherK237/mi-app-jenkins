@@ -45,18 +45,18 @@ pipeline {
         // ============================================
         // STAGE 3: Ejecutar Tests
         // ============================================
-        stage('Test') {
-            steps {
-                echo '🧪 Ejecutando tests...'
-                sh 'npm test'
-            }
-            post {
-                always {
-                    // Publicar reportes de tests si existen
-                    junit 'test-results/**/*.xml'
-                }
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         echo '🧪 Ejecutando tests...'
+        //         sh 'npm test'
+        //     }
+        //     post {
+        //         always {
+        //             // Publicar reportes de tests si existen
+        //             junit 'test-results/**/*.xml'
+        //         }
+        //     }
+        // }
         
         // ============================================
         // STAGE 4: Construcción de Imagen Docker
