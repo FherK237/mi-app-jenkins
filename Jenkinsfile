@@ -74,10 +74,10 @@ pipeline {
         // STAGE 5: Publicación en Registro
         // ============================================
         stage('Push to Registry') {
-            when {
-                // Solo publicar en main o si es un tag
-                branch 'main'
-            }
+            // when {
+            //     // Solo publicar en main o si es un tag
+            //     branch 'main'
+            // }
             steps {
                 echo '📤 Publicando imagen en GitHub Container Registry...'
                 script {
@@ -106,9 +106,9 @@ pipeline {
         // STAGE 6: Verificación
         // ============================================
         stage('Verify Published Image') {
-            when {
-                branch 'main'
-            }
+            // when {
+            //     branch 'main'
+            // }
             steps {
                 echo '✅ Verificando imagen publicada...'
                 script {
