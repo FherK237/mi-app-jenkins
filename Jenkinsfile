@@ -130,19 +130,19 @@ pipeline {
     post {
         success {
             echo '🎉 Pipeline completado exitosamente!'
-            emailext (
-                subject: "✅ Pipeline Success: ${JOB_NAME} - ${BUILD_NUMBER}",
-                body: "El pipeline se ha completado exitosamente.\n\nImagen publicada: ${IMAGE_TAG_COMMIT}",
-                to: 'equipo@ejemplo.com'
-            )
+            // emailext (
+            //     subject: "✅ Pipeline Success: ${JOB_NAME} - ${BUILD_NUMBER}",
+            //     body: "El pipeline se ha completado exitosamente.\n\nImagen publicada: ${IMAGE_TAG_COMMIT}",
+            //     to: 'equipo@ejemplo.com'
+            // )
         }
         failure {
             echo '❌ Pipeline falló!'
-            emailext (
-                subject: "❌ Pipeline Failed: ${JOB_NAME} - ${BUILD_NUMBER}",
-                body: "El pipeline ha fallado. Revisa los logs para más detalles.",
-                to: 'equipo@ejemplo.com'
-            )
+            // emailext (
+            //     subject: "❌ Pipeline Failed: ${JOB_NAME} - ${BUILD_NUMBER}",
+            //     body: "El pipeline ha fallado. Revisa los logs para más detalles.",
+            //     to: 'equipo@ejemplo.com'
+            // )
         }
         cleanup {
             echo '🧹 Limpiando recursos...'
